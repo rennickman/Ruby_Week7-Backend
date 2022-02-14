@@ -1,14 +1,12 @@
 <%= render "header", title: @title, notice: @notice  %>
 
-<%= form_with url: "/sum", local: true, data: { turbo: false } do |f| %>
+<%= form_with url: "/subtract", local: true, data: { turbo: false } do |f| %>
     <%= text_field_tag :number1 %>
     <%= text_field_tag :number2 %>
-    <%= submit_tag "+" %>
+    <%= submit_tag "-" %>
   
 <% end %>
 
 <% if(@result) %>
-    <%= @num1 %> + <%= @num2 %> = <%= @result %>
+    <%= @num1 %> - <%= @num2 %> = <%= @result %>
 <% end %>
-
-
