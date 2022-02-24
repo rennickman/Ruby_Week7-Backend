@@ -21,6 +21,8 @@ end
 
 class CalculatorController < ApplicationController
 
+  protect_from_forgery with: :exception, unless: -> {request.format.json?}
+
   def sum
 
     @title = "Sum"
@@ -34,8 +36,16 @@ class CalculatorController < ApplicationController
       # we use the arithmetic_calculator.rb of the lib folder
       if((@num1.is_numeric?) && (@num2.is_numeric?))
         @result = ArithmeticCalculator.add(@num1.to_i, @num2.to_i)
+        respond_to do |format|
+          format.json { render json: {"result" => @result}.to_json, status: :ok}
+          format.html
+        end
       else
         @notice = "You must supply numbers for both fields"
+        respond_to do |format|
+          format.json {render json: {"error" => @notice}.to_json, status: :bad_request}
+          format.html
+        end
       end
     end
 
