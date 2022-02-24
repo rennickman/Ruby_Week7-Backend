@@ -1,13 +1,26 @@
 require 'arithmetic_calculator'
 
 class String
-  def is_numeric? 
+  def is_numeric?
     true if Float(self) rescue false
   end
 end
 
+class Integer
+  def is_numeric?
+    true
+  end
+end
+
+class Float
+  def is_numeric?
+    true
+  end
+end
+
+
 class CalculatorController < ApplicationController
-  
+
   def sum
 
     @title = "Sum"
@@ -21,7 +34,7 @@ class CalculatorController < ApplicationController
       # we use the arithmetic_calculator.rb of the lib folder
       if((@num1.is_numeric?) && (@num2.is_numeric?))
         @result = ArithmeticCalculator.add(@num1.to_i, @num2.to_i)
-      else 
+      else
         @notice = "You must supply numbers for both fields"
       end
     end
@@ -41,7 +54,7 @@ class CalculatorController < ApplicationController
       # we use the arithmetic_calculator.rb of the lib folder
       if((@num1.is_numeric?) && (@num2.is_numeric?))
         @result = ArithmeticCalculator.multiply(@num1.to_i, @num2.to_i)
-      else 
+      else
         @notice = "You must supply numbers for both fields"
       end
     end
@@ -49,7 +62,7 @@ class CalculatorController < ApplicationController
   end
 
   def subtract
-    
+
     @title = "Subtract"
     @notice = ""
     # the user data is sent via the params
@@ -61,7 +74,7 @@ class CalculatorController < ApplicationController
       # we use the arithmetic_calculator.rb of the lib folder
       if((@num1.is_numeric?) && (@num2.is_numeric?))
         @result = ArithmeticCalculator.subtract(@num1.to_i, @num2.to_i)
-      else 
+      else
         @notice = "You must supply numbers for both fields"
       end
     end
@@ -86,13 +99,13 @@ class CalculatorController < ApplicationController
         rescue
           @result = "Inf"
         end
-        
-      else 
+
+      else
         @notice = "You must supply numbers for both fields"
       end
     end
 
 
   end
-  
+
 end
